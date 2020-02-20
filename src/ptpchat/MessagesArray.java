@@ -43,10 +43,20 @@ public class MessagesArray {
         return null;
     }
 
-    public ArrayList<Message> getMessagesSender(String sender) {
+    public ArrayList<Message> getMessagesAddress(String address) {
         ArrayList<Message> sendersMessages = new ArrayList<Message>();
         for (Message m: messages) {
-            if (m.getSender().compareTo(sender) == 0) {
+            if (m.getAddress().compareTo(address) == 0) {
+                sendersMessages.add(m);
+            }
+        }
+        return sendersMessages;
+    }
+
+    public ArrayList<Message> getMessagesUsername(String username) {
+        ArrayList<Message> sendersMessages = new ArrayList<Message>();
+        for (Message m: messages) {
+            if (m.getUsername().compareTo(username) == 0) {
                 sendersMessages.add(m);
             }
         }
