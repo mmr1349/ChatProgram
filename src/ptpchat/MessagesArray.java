@@ -1,8 +1,10 @@
 package ptpchat;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MessagesArray {
+    private LinkedList<Observer<MessagesArray, Message>> observers = new LinkedList<>();
     private ArrayList<Message> messages;
 
     public MessagesArray(ArrayList<Message> messages) {
@@ -13,8 +15,19 @@ public class MessagesArray {
         messages = new ArrayList<Message>();
     }
 
+    public void addObserver(Observer<MessagesArray, Message> observer) {
+        observers.add(observer);
+    }
+
+    public void notifyObservers(Message message) {
+        for (Observer o: observers) {
+            o.update(this, message);
+        }
+    }
+
     public void addMessage(Message toAdd) {
         messages.add(toAdd);
+        notifyObservers(toAdd);
     }
 
     public ArrayList<Message> getMessages() {
